@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/main_bg"
+        />
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/logo_image"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginTop="24dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="笔记宝"
+            android:textColor="@color/mdtp_white"
+            android:textSize="30sp"
+            />
+
+        <EditText
+            android:id="@+id/accout_phone"
+            android:hint="@string/accout_hint"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_my_input"
+            android:maxLength="11"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="@dimen/common_margin"
+            android:gravity="center_vertical|start"
+            android:padding="15dp"
+            />
+
+        <EditText
+            android:id="@+id/accout_pwd"
+            android:hint="@string/pwd_hint"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_my_input"
+            android:maxLength="11"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="@dimen/common_margin"
+            android:gravity="center_vertical|start"
+            android:padding="15dp"
+            />
+
+
+        <Button
+            android:id="@+id/btn_login"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginEnd="45dp"
+            android:background="@drawable/bg_blue_with_deep_blue_stroke"
+            />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:text="没有账号?"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        android:layout_margin="@dimen/common_margin"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

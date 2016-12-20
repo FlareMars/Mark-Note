@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.FullScreenDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout_preview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/bg"
+    tools:openDrawer="end"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="@string/note_default_title"
+            android:textColor="@color/font_gray"
+            android:textColorHint="@color/font_gray"
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:paddingBottom="3dp"
+            />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="3dp"
+            android:background="@android:color/transparent"
+            android:gravity="start|top"
+            android:hint="@string/note_hint"
+            />
+
+        <LinearLayout
+            android:id="@+id/container_fast_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/editActionsPanelBg"
+            >
+
+            <TextView
+                android:id="@+id/btn_fast_input_pound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="fastInput"
+                android:text="#"
+                style="@style/font_fast_input"
+                android:background="?attr/selectableItemBackground"
+                />
+
+            <TextView
+                android:id="@+id/btn_fast_input_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="fastInput"
+                android:text="*"
+                style="@style/font_fast_input"
+                android:background="?attr/selectableItemBackground"
+                />
+
+            <TextView
+                android:id="@+id/btn_fast_input_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="fastInput"
+                android:text="+"
+                style="@style/font_fast_input"
+                android:background="?attr/selectableItemBackground"
+                />
+
+            <TextView
+                android:id="@+id/btn_fast_input_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="fastInput"
+                android:text="-"
+                style="@style/font_fast_input"
+                android:background="?attr/selectableItemBackground"
+                />
+
+            <TextView
+                android:id="@+id/btn_fast_input_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="fastInput"
+                android:text="."
+                style="@style/font_fast_input"
+                android:background="?attr/selectableItemBackground"
+                />
+
+            <TextView
+                android:id="@+id/btn_fast_input_tran"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="fastInput"
+                android:text="```"
+                style="@style/font_fast_input"
+                android:background="?attr/selectableItemBackground"
+                />
+
+            <TextView
+                android:id="@+id/btn_fast_input_morethan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="fastInput"
+                android:text=">"
+                style="@style/font_fast_input"
+                android:background="?attr/selectableItemBackground"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/thick_divider"
+            />
+
+        <com.flaremars.markandnote.widget.EditActionsPanel
+            android:id="@+id/edit_actions_panel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_action_panel_height"
+            />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/drawer_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/previewPanelBg"
+        android:layout_gravity="end"
+        >
+
+        <com.flaremars.markandnote.widget.MarkdownView
+            android:id="@+id/md_preview_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+</android.support.v4.widget.FullScreenDrawerLayout>

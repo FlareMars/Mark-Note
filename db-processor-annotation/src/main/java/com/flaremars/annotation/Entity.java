@@ -1,0 +1,16 @@
+package com.flaremars.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * Created by FlareMars on 2016/10/21.
+ */
+@Target(value = ElementType.TYPE)
+@Retention(value = RetentionPolicy.CLASS)
+public @interface Entity {
+    String name();
+    Class objectClass();
+}

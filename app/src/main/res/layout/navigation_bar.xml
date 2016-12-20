@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+    <com.flaremars.markandnote.widget.BottomSingleView
+        android:id="@+id/nav_one"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        app:bsv_normalBitmap="@mipmap/ic_tag_risk_normal"
+        app:bsv_pitchBitmap="@mipmap/ic_tag_risk_selected"
+        app:bsv_text="笔记"
+        app:bsv_alpha="true"
+        app:bsv_textColor="@color/colorPrimary"
+        />
+    <com.flaremars.markandnote.widget.BottomSingleView
+        android:id="@+id/nav_two"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        app:bsv_textColor="@color/colorPrimary"
+        app:bsv_normalBitmap="@mipmap/ic_tag_risk_normal"
+        app:bsv_pitchBitmap="@mipmap/ic_tag_risk_selected"
+        app:bsv_text="书签"
+        />
+
+</merge>

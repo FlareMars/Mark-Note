@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="custom_colors">
+        <item>@color/action_gray</item>
+        <item>@color/action_blue</item>
+        <item>@color/action_red</item>
+    </array>
+
+    <array name="note_actions">
+        <item>置顶</item>
+        <item>查看</item>
+        <item>编辑</item>
+        <item>删除</item>
+    </array>
+
+    <array name="note_actions_with_top">
+        <item>取消置顶</item>
+        <item>查看</item>
+        <item>编辑</item>
+        <item>删除</item>
+    </array>
+</resources>

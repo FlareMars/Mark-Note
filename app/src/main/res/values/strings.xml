@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">MarkAndNote</string>
+    <string name="title_activity_select_pictures">图片选择</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="action_color_selector_title">select color for note</string>
+    <string name="title_activity_notes_main">NotesMainActivity</string>
+
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="complete">完成</string>
+
+    <string name="dialog_msg_quit_edit">退出编辑</string>
+    <string name="dialog_msg_has_no_saved">尚有修改内容未保存</string>
+    <string name="dialog_msg_save_and_quit">保存并退出</string>
+    <string name="dialog_msg_quit">退出</string>
+
+    <string name="note_default_title">未填写标题</string>
+    <string name="note_hint">编辑内容</string>
+    <string name="edit_action_insert_link">插入链接</string>
+    <string name="edit_action_link_title">标题</string>
+    <string name="edit_action_link_url">链接</string>
+    <string name="title_activity_view_note">笔记查看</string>
+
+    <string name="accout_hint">手机号</string>
+    <string name="verification_code">短信验证码</string>
+    <string name="pwd_hint">密码</string>
+    <string name="pwd_setting_hint">设置密码</string>
+    <string name="accout_username">昵称</string>
+    <string name="login">登录</string>
+    <string name="register_and_login">注册并登录</string>
+</resources>

@@ -1,0 +1,1 @@
+include ':app', ':mdprocessor', ':db-processor', ':db-processor-annotation'

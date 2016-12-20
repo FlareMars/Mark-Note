@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="0dp"
+    android:background="?attr/selectableItemBackground"
+    >
+
+    <TextView
+        android:id="@+id/tv_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/font_black"
+        android:textSize="23sp"
+        android:text="66"
+        />
+    <TextView
+        android:id="@+id/tv_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="66"
+        android:textColor="@color/font_black"
+        android:textSize="16sp"
+        android:layout_toEndOf="@+id/tv_day"
+        android:layout_alignBaseline="@+id/tv_day"
+        android:layout_marginEnd="10dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/panel_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        >
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/font_gray"
+        android:text="content content content content content content content content content content content content content"
+        android:maxLines="3"
+        android:ellipsize="end"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_note_images"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tv_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="10dp"
+        android:showDividers="middle"
+        android:divider="@drawable/divider_note_images"
+        >
+
+        <ImageView
+            android:id="@+id/iv_first_image"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/note_image_height"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            />
+
+        <ImageView
+            android:id="@+id/iv_second_image"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/note_image_height"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/ll_note_images"
+        android:background="@color/divider"
+        />
+
+    </RelativeLayout>
+
+</RelativeLayout>

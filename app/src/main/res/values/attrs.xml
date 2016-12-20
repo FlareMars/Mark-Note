@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BottomSingleView">
+        <attr name="bsv_textColor" format="reference|color"/>
+        <attr name="bsv_myTextSize" format="reference|dimension"/>
+        <attr name="bsv_text" format="reference|string"/>
+        <attr name="bsv_normalBitmap" format="reference"/>
+        <attr name="bsv_pitchBitmap" format="reference"/>
+        <attr name="bsv_alpha" format="boolean"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#33CCFF</color>
+    <color name="colorPrimaryDark">#2bacd7</color>
+    <color name="colorAccent">#65d1f5</color>
+    <color name="bg">#ECF0F5</color>
+
+    <!-- Item Note -->
+    <color name="font_black">#262626</color>
+    <color name="font_gray">#c5aea7a7</color>
+    <color name="bg_important_top">#c1bdbd</color>
+    <color name="bottom_black">#2E3235</color>
+    <color name="bottom_red">#DE4C4F</color>
+
+    <!-- FullScreenEditActivity -->
+    <color name="editBackground">#fafafa</color>
+    <color name="editActionsPanelBg">#e9e9e9</color>
+    <color name="statusBarColor">#d6d6d6</color>
+
+    <color name="editActionPressed">#a9a7a7</color>
+    <color name="previewPanelBg">#bebebe</color>
+
+    <!-- EditAction Colors -->
+    <color name="action_gray">#747474</color>
+    <color name="action_blue">#484ad2</color>
+    <color name="action_red">#d24949</color>
+
+    <!-- BottomSingleView -->
+    <color name="default_text_color">#9a9a9a</color>
+
+    <!-- Normal Color -->
+    <color name="white">#fafafa</color>
+    <color name="divider">#33cccccc</color>
+    <color name="thick_divider">#88cccccc</color>
+    <color name="half_black">#808080</color>
+    <color name="white_pressed">#f1f1f1</color>
+    <color name="bg_special">#22cccccc</color>
+    <color name="bg_note_item_pressed">#66cccccc</color>
+
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="note_bg">#FDEFE1</color>
+</resources>
