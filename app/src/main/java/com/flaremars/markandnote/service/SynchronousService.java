@@ -85,19 +85,10 @@ public class SynchronousService extends IntentService {
      * 7. 更新本地笔记的synchronousTime
      */
     private void pushNotes(String userId) throws IOException, JSONException {
-        // 1. 获取所有的本地笔记数据
-        List<Note> localNotes = NoteStorage.getInstance().findAll();
-
-        // 2. 筛选出synchronousTime < modifiedTime的数据
-        List<Note> needSynchronized = new ArrayList<>();
-        for (Note temp : localNotes) {
-            if (temp.needSynchronized()) {
-                needSynchronized.add(temp);
-            }
-        }
+        List<Note> needSynchronized = filterNotes(NoteStorage.getInstance().findAll());
 
         Pattern pattern = Pattern.compile("!\\[\\S+]\\(\\S+\\)");
-        for (final Note temp : needSynchronized) { // 3. 遍历剩余笔记，切分内容
+        for (final Note temp : needSynchronized) {
             final StringBuilder noteData = new StringBuilder(temp.getContent());
             final Matcher matcher = pattern.matcher(noteData);
             while (matcher.find()) {
@@ -107,63 +98,88 @@ public class SynchronousService extends IntentService {
                 final String pictureUrl = content.substring(urlStart, urlEnd);
                 Log.d(TAG, pictureUrl + " " + matcher.start() + " " + matcher.end());
 
-                if (pictureUrl.startsWith("file")) { // 4. 抽取本地图片路径（网络路径图片不作处理）
-                    boolean hasUploaded = ComponentHolder.getAppComponent().getSharedPrefHelper().getBool(pictureUrl);
-                    if (!hasUploaded) {
-                        Log.d(TAG, "file[" + pictureUrl + "] need to be uploaded!" );
-                        File file = new File(pictureUrl.substring(7));
-                        String responseUrl = bmobSynchronizedUpload(file);
+                if (isLocalPictureNotUploaded(pictureUrl)) {
+                    Log.d(TAG, "file[" + pictureUrl + "] need to be uploaded!" );
+                    File file = new File(pictureUrl.substring(7));
+                    String responseUrl = bmobSynchronizedUpload(file);
 
-
-                        if (StringUtils.INSTANCE.isEmpty(responseUrl)) {
-                            Log.d(TAG, "file[" + pictureUrl + "] uploaded fail!");
-                            continue;
-                        }
-                        Log.d(TAG, "file[" + pictureUrl + "] uploaded finished! url = " + responseUrl);
-                        // 5. 上传本地图片到Bmob（服务器），修改笔记内容图片路径为网络路径
-                        noteData.replace(matcher.start() + urlStart, matcher.end()-1, responseUrl);
-                        ComponentHolder.getAppComponent().getSharedPrefHelper().saveBool(pictureUrl, true);
+                    if (StringUtils.INSTANCE.isEmpty(responseUrl)) {
+                        Log.d(TAG, "file[" + pictureUrl + "] uploaded fail!");
+                        continue;
                     }
+                    Log.d(TAG, "file[" + pictureUrl + "] uploaded finished! url = " + responseUrl);
+
+                    // 远端笔记内容使用远程图片
+                    noteData.replace(matcher.start() + urlStart, matcher.end()-1, responseUrl);
+                    ComponentHolder.getAppComponent().getSharedPrefHelper().saveBool(pictureUrl, true);
                 }
             }
 
-            // 6. 同步数据
-            RemoteNote remoteNote = new RemoteNote();
-            remoteNote.setDate(temp.getDate());
-            remoteNote.setTitle(temp.getTitle());
-            remoteNote.setContent(noteData.toString());
-            remoteNote.setPutTopFlag(temp.getPutTopFlag());
-            remoteNote.setUserId(userId);
-            if (temp.getNoteId() != null && !StringUtils.INSTANCE.isEmpty(temp.getNoteId())) {
-                remoteNote.setObjectId(temp.getNoteId());
-                remoteNote.update(temp.getNoteId(), new UpdateListener() {
-                    @Override
-                    public void done(BmobException e) {
-                        if (e == null) {
-                            Log.d(TAG, "note update successful");
-                            temp.setSynchronousTime(new Date().getTime());
-                            NoteStorage.getInstance().update(temp);
-                        } else {
-                            Log.e(TAG, e.getErrorCode() + " " + e.getMessage());
-                        }
+            synchronizeData(temp, noteData.toString(), userId);
+        }
+    }
+
+    // 同步数据到远端
+    private void synchronizeData(Note src, String newContent, String userId) {
+        RemoteNote remoteNote = new RemoteNote();
+        remoteNote.setDate(src.getDate());
+        remoteNote.setTitle(src.getTitle());
+        remoteNote.setContent(newContent);
+        remoteNote.setPutTopFlag(src.getPutTopFlag());
+        remoteNote.setUserId(userId);
+        saveOrUpdateRemoteNote(src, remoteNote);
+    }
+
+    private void saveOrUpdateRemoteNote(final Note src, RemoteNote remoteNote) {
+        if (!StringUtils.INSTANCE.isEmpty(src.getNoteId())) {
+            remoteNote.setObjectId(src.getNoteId());
+            remoteNote.update(src.getNoteId(), new UpdateListener() {
+                @Override
+                public void done(BmobException e) {
+                    if (e == null) {
+                        Log.d(TAG, "note update successful");
+                        src.setSynchronousTime(new Date().getTime());
+                        NoteStorage.getInstance().update(src);
+                    } else {
+                        Log.e(TAG, e.getErrorCode() + " " + e.getMessage());
                     }
-                });
-            } else {
-                remoteNote.save(new SaveListener<String>() {
-                    @Override
-                    public void done(String objectId, BmobException e) {
-                        if (e == null) {
-                            Log.d(TAG, "note save successful");
-                            temp.setNoteId(objectId);
-                            temp.setSynchronousTime(new Date().getTime());
-                            NoteStorage.getInstance().update(temp);
-                        } else {
-                            Log.e(TAG, e.getErrorCode() + " " + e.getMessage());
-                        }
+                }
+            });
+        } else {
+            remoteNote.save(new SaveListener<String>() {
+                @Override
+                public void done(String objectId, BmobException e) {
+                    if (e == null) {
+                        Log.d(TAG, "note save successful");
+                        src.setNoteId(objectId);
+                        src.setSynchronousTime(new Date().getTime());
+                        NoteStorage.getInstance().update(src);
+                    } else {
+                        Log.e(TAG, e.getErrorCode() + " " + e.getMessage());
                     }
-                });
+                }
+            });
+        }
+    }
+
+    // 判断是否未本地图片且是否曾经进行上传
+    private boolean isLocalPictureNotUploaded(String picturePath) {
+        return picturePath.startsWith("file") && !ComponentHolder.getAppComponent().getSharedPrefHelper().getBool(picturePath);
+    }
+
+    // 筛选出需要同步的笔记(synchronousTime < modifiedTime)
+    private List<Note> filterNotes(List<Note> source) {
+        if (source == null) {
+            return new ArrayList<>();
+        }
+
+        List<Note> needSynchronized = new ArrayList<>();
+        for (Note temp : source) {
+            if (temp.needSynchronized()) {
+                needSynchronized.add(temp);
             }
         }
+        return needSynchronized;
     }
 
     private String bmobSynchronizedUpload(File file) throws IOException, JSONException {
