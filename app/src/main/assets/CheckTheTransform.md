@@ -22,8 +22,6 @@
 
 # 复选框
 %%% todoList
-+
-*[x]
 *[x] I have a car
 *[] I have a house
 + I have a mbp
